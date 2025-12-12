@@ -123,7 +123,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Static file serving for audio files
-const audioOutputPath = path.join(__dirname, '../audio_reader_standalone/output');
+const audioOutputPath = path.join(__dirname, 'audio_reader_standalone/output');
 app.use('/audio', express.static(audioOutputPath));
 
 // Make db and mongoClient available to routes

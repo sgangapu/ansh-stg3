@@ -73,7 +73,7 @@ function generateBookId(title) {
  */
 async function processAudiobook(pdfPath, title) {
   const bookId = generateBookId(title);
-  const outputDir = path.join(__dirname, '../../audio_reader_standalone/output');
+  const outputDir = path.join(__dirname, '../audio_reader_standalone/output');
   const bookOutputDir = path.join(outputDir, bookId);
 
   console.log(`\n${'='.repeat(60)}`);

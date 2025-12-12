@@ -30,7 +30,7 @@ A MERN stack application that converts PDFs into AI-narrated audiobooks with syn
 brew services start mongodb-community
 
 # 2. Configure API keys
-cp audio_reader_standalone/env_template.txt audio_reader_standalone/.env
+cp backend/audio_reader_standalone/env_template.txt backend/audio_reader_standalone/.env
 # Edit .env with your GOOGLE_API_KEY and CARTESIA_API_KEY
 
 # 3. Start everything
@@ -67,7 +67,7 @@ Open http://localhost:3000
 Uses Docker to run both Node.js and Python (for audio generation).
 
 1. Create a new project on [Railway](https://railway.app/)
-2. Connect your GitHub repo — **deploy from project root** (not backend folder)
+2. Connect your GitHub repo and set `backend` as the root directory
 3. Railway will auto-detect the `Dockerfile`
 4. Set environment variables:
    - `MONGO_URI` - MongoDB Atlas connection string

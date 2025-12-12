@@ -1,7 +1,7 @@
 # Node.js + Python backend for audiobook generation
 FROM node:18-slim
 
-# Install Python and dependencies
+# Install Python and required system packages
 RUN apt-get update && apt-get install -y \
     python3 \
     python3-pip \
@@ -11,29 +11,29 @@ RUN apt-get update && apt-get install -y \
 
 WORKDIR /app
 
-# Copy package files first for better caching
+# Copy Python requirements first (for better Docker caching)
+COPY audio_reader_standalone/requirements.txt ./audio_reader_standalone/
+COPY audio_reader_standalone/requirements_mongo.txt ./audio_reader_standalone/
+
+# Create Python virtual environment and install dependencies
+RUN python3 -m venv /app/audio_reader_standalone/venv && \
+    /app/audio_reader_standalone/venv/bin/pip install --upgrade pip && \
+    /app/audio_reader_standalone/venv/bin/pip install -r /app/audio_reader_standalone/requirements.txt && \
+    /app/audio_reader_standalone/venv/bin/pip install -r /app/audio_reader_standalone/requirements_mongo.txt
+
+# Copy Node.js package files
 COPY package*.json ./
 
 # Install Node.js dependencies
 RUN npm ci --only=production
 
-# Copy Python requirements
-COPY ../audio_reader_standalone/requirements.txt ./python_deps/
-COPY ../audio_reader_standalone/requirements_mongo.txt ./python_deps/
-
-# Create Python virtual environment and install dependencies
-RUN python3 -m venv ../audio_reader_standalone/venv && \
-    ../audio_reader_standalone/venv/bin/pip install --upgrade pip && \
-    ../audio_reader_standalone/venv/bin/pip install -r ./python_deps/requirements.txt && \
-    ../audio_reader_standalone/venv/bin/pip install -r ./python_deps/requirements_mongo.txt
-
-# Copy application code
+# Copy all application code
 COPY . .
 
-# Create output directory
-RUN mkdir -p ../audio_reader_standalone/output
+# Create output directory for generated audiobooks
+RUN mkdir -p /app/audio_reader_standalone/output
 
-# Expose port
+# Expose port (Railway sets PORT env var automatically)
 EXPOSE 5000
 
 # Start the server

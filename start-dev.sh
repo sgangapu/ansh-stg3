@@ -19,7 +19,7 @@ if [ "$1" = "--clean" ]; then
     docker exec mongodb mongosh audiobooks_db --quiet --eval "db.books.deleteMany({}); db.segments.deleteMany({}); db.segment_timings.deleteMany({}); print('✅ Cleaned MongoDB');" 2>/dev/null
     
     # Clean output directory
-    rm -rf audio_reader_standalone/output/* 2>/dev/null
+    rm -rf backend/audio_reader_standalone/output/* 2>/dev/null
     
     # Clean uploads
     find backend/uploads -name "*.pdf" -delete 2>/dev/null
@@ -85,10 +85,10 @@ if [ ! -f "backend/.env" ]; then
     echo -e "${GREEN}✓ Created backend/.env${NC}"
 fi
 
-if [ ! -f "audio_reader_standalone/.env" ]; then
-    echo -e "${RED}⚠️  audio_reader_standalone/.env not found!${NC}"
+if [ ! -f "backend/audio_reader_standalone/.env" ]; then
+    echo -e "${RED}⚠️  backend/audio_reader_standalone/.env not found!${NC}"
     echo -e "Please create it with your API keys:"
-    echo -e "  cd audio_reader_standalone"
+    echo -e "  cd backend/audio_reader_standalone"
     echo -e "  cp env_template.txt .env"
     echo -e "  # Then edit .env with your API keys\n"
 else

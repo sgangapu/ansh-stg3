@@ -2,8 +2,8 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 // Path to Python virtual environment
-const PYTHON_BIN = path.join(__dirname, '../../audio_reader_standalone/venv/bin/python');
-const SCRIPTS_DIR = path.join(__dirname, '../../audio_reader_standalone');
+const PYTHON_BIN = path.join(__dirname, '../audio_reader_standalone/venv/bin/python');
+const SCRIPTS_DIR = path.join(__dirname, '../audio_reader_standalone');
 
 /**
  * Execute a Python script with arguments
