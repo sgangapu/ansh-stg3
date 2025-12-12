@@ -1,0 +1,9 @@
+# Python dependencies for audiobook generation
+PyPDF2==3.0.1
+cartesia>=0.1.0
+google-generativeai==0.3.2
+numpy==1.24.3
+pymongo>=4.6.0
+python-dotenv==1.0.0
+requests==2.31.0
+soundfile==0.12.1
