@@ -1,4 +1,4 @@
-# MERN Audiobook Application
+# Audiobook Application - Ansh Gangapurkar - CS348
 
 A MERN stack application that converts PDFs into AI-narrated audiobooks with synchronized text highlighting.
 
