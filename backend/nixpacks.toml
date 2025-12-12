@@ -1,12 +1,13 @@
-# Nixpacks configuration for Node.js + Python
+# Nixpacks configuration for Node.js + Python with gRPC support
 [phases.setup]
-nixPkgs = ["python310", "nodejs_18"]
+nixPkgs = ["python310", "nodejs_18", "gcc", "glibc", "zlib"]
 
 [phases.install]
 cmds = [
     "npm ci",
     "python -m venv audio_reader_standalone/venv",
     "audio_reader_standalone/venv/bin/pip install --upgrade pip",
+    "audio_reader_standalone/venv/bin/pip install --no-cache-dir grpcio",
     "audio_reader_standalone/venv/bin/pip install -r requirements.txt"
 ]
 
