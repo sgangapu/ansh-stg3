@@ -1,0 +1,15 @@
+# Nixpacks configuration for Node.js + Python with gRPC support
+[phases.setup]
+nixPkgs = ["python311", "nodejs_18"]
+aptPkgs = ["libstdc++6", "libgomp1"]
+
+[phases.install]
+cmds = [
+    "npm ci",
+    "python -m venv audio_reader_standalone/venv",
+    "audio_reader_standalone/venv/bin/pip install --upgrade pip",
+    "audio_reader_standalone/venv/bin/pip install -r requirements.txt"
+]
+
+[start]
+cmd = "npm start"
