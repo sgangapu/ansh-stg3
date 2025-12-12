@@ -2,14 +2,14 @@
  * API service for interacting with the backend
  */
 
-// In production, use the VITE_API_URL env variable; in dev, use relative path (Vite proxy handles it)
-const API_BASE = import.meta.env.VITE_API_URL 
-  ? `${import.meta.env.VITE_API_URL}/api` 
-  : '/api';
+// Backend API URL configuration
+// In production: uses VITE_API_URL env var, falls back to Railway URL
+// In development: uses relative path (Vite proxy handles it)
+const BACKEND_URL = import.meta.env.VITE_API_URL || 
+  (import.meta.env.PROD ? 'https://ansh-stg3-production.up.railway.app' : '');
 
-const AUDIO_BASE = import.meta.env.VITE_API_URL 
-  ? `${import.meta.env.VITE_API_URL}/audio` 
-  : '/audio';
+const API_BASE = BACKEND_URL ? `${BACKEND_URL}/api` : '/api';
+const AUDIO_BASE = BACKEND_URL ? `${BACKEND_URL}/audio` : '/audio';
 
 /**
  * Fetch all books with optional filters
