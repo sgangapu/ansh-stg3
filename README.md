@@ -64,14 +64,18 @@ Open http://localhost:3000
 
 ### Backend (Railway)
 
+Uses Docker to run both Node.js and Python (for audio generation).
+
 1. Create a new project on [Railway](https://railway.app/)
-2. Connect your GitHub repo and select the `backend` folder as root
-3. Add a MongoDB service (or use MongoDB Atlas)
+2. Connect your GitHub repo — **deploy from project root** (not backend folder)
+3. Railway will auto-detect the `Dockerfile`
 4. Set environment variables:
-   - `MONGO_URI` - Your MongoDB connection string
+   - `MONGO_URI` - MongoDB Atlas connection string
    - `MONGO_DB_NAME` - Database name (default: `audiobooks_db`)
-   - `FRONTEND_URL` - Your Vercel frontend URL (e.g., `https://your-app.vercel.app`)
-5. Deploy - Railway will auto-detect Node.js and use the config
+   - `FRONTEND_URL` - Your Vercel URL (for CORS)
+   - `GOOGLE_API_KEY` - Gemini API key (for text analysis)
+   - `CARTESIA_API_KEY` - Cartesia API key (for TTS)
+5. Deploy
 
 ### Frontend (Vercel)
 
@@ -85,9 +89,11 @@ Open http://localhost:3000
 
 | Service | Variable | Description |
 |---------|----------|-------------|
-| Railway | `MONGO_URI` | MongoDB connection string |
+| Railway | `MONGO_URI` | MongoDB Atlas connection string |
 | Railway | `MONGO_DB_NAME` | Database name |
 | Railway | `FRONTEND_URL` | Vercel URL (for CORS) |
+| Railway | `GOOGLE_API_KEY` | Gemini API key |
+| Railway | `CARTESIA_API_KEY` | Cartesia TTS API key |
 | Vercel | `VITE_API_URL` | Railway backend URL |
 
 ## License

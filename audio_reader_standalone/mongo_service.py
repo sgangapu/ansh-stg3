@@ -27,7 +27,7 @@ class AudiobookMongoService:
             mongo_uri: MongoDB connection string (default: mongodb://localhost:27017/)
             db_name: Database name
         """
-        self.mongo_uri = mongo_uri or os.getenv("MONGODB_URI", "mongodb://localhost:27017/")
+        self.mongo_uri = mongo_uri or os.getenv("MONGO_URI", "mongodb://localhost:27017/")
         self.db_name = db_name
         
         try:

@@ -102,10 +102,18 @@ function getMongoClient() {
 }
 
 // CORS configuration for production
+const allowedOrigins = [
+  'https://ansh-stg3.vercel.app',
+  'http://localhost:3000'
+];
+
+// Add FRONTEND_URL env var if set
+if (process.env.FRONTEND_URL) {
+  allowedOrigins.push(process.env.FRONTEND_URL);
+}
+
 const corsOptions = {
-  origin: process.env.FRONTEND_URL 
-    ? [process.env.FRONTEND_URL, 'http://localhost:3000'] 
-    : '*',
+  origin: allowedOrigins,
   credentials: true
 };
 
