@@ -19,16 +19,16 @@ logger = logging.getLogger(__name__)
 class AudiobookMongoService:
     """Service for managing audiobook segments in MongoDB"""
     
-    def __init__(self, mongo_uri: str = None, db_name: str = "audiobooks_db"):
+    def __init__(self, mongo_uri: str = None, db_name: str = None):
         """
         Initialize MongoDB connection.
         
         Args:
             mongo_uri: MongoDB connection string (default: mongodb://localhost:27017/)
-            db_name: Database name
+            db_name: Database name (default: from env or audiobooks_db)
         """
         self.mongo_uri = mongo_uri or os.getenv("MONGO_URI", "mongodb://localhost:27017/")
-        self.db_name = db_name
+        self.db_name = db_name or os.getenv("MONGO_DB_NAME", "audiobooks_db")
         
         try:
             self.client = MongoClient(self.mongo_uri, serverSelectionTimeoutMS=5000)
