@@ -40,8 +40,8 @@ class AudiobookMongoService:
             self.books_collection = self.db["books"]
             self.segments_collection = self.db["segments"]
             
-            # Create indexes for efficient queries
-            self._create_indexes()
+            # Skip index creation to avoid disk space issues on free tier
+            # Indexes are created by the Node.js backend on startup instead
             
             logger.info(f"✅ Connected to MongoDB: {self.db_name}")
             
