@@ -234,7 +234,7 @@ router.get('/:bookId/audio', validateBookIdParam, async (req, res) => {
     const { bookId } = req.params;  // Validated - only a-z, 0-9, _ allowed
     const audioPath = path.join(
       __dirname,
-      '../../audio_reader_standalone/output',
+      '../audio_reader_standalone/output',
       bookId,
       'book_continuous.wav'
     );
@@ -465,7 +465,7 @@ router.delete('/:bookId', validateBookIdParam, async (req, res) => {
     console.log(`✅ Transaction completed: deleted book '${bookId}' from all collections`);
     
     // Delete audio files (outside transaction - filesystem doesn't support transactions)
-    const bookOutputDir = path.join(__dirname, '../../audio_reader_standalone/output', bookId);
+    const bookOutputDir = path.join(__dirname, '../audio_reader_standalone/output', bookId);
     try {
       await fs.rm(bookOutputDir, { recursive: true, force: true });
       console.log(`🗑️  Deleted files for book: ${bookId}`);
